@@ -127,9 +127,5 @@ class Field(Base):
     for setting a short delay for specific cadence requirements.
     """
 
-    __mapper_args__ = {
-        "polymorphic_identity": "field",
-    }
-
     def __post_init__(self) -> None:
         logger.debug("_Field = %s" % self.__repr__)

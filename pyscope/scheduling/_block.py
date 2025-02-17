@@ -259,8 +259,6 @@ class _Block(Base):
     user and debugging purposes by the observatory staff.
     """
 
-    __mapper_args__ = {"polymorphic_identity": "block"}
-
     def __post_init__(self) -> None:
         logger.debug("_Block = %s" % self.__repr__)
 

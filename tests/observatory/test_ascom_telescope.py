@@ -35,7 +35,7 @@ def test_setpark(device, disconnect):
 )
 def test_slewtoaltaz(device, disconnect):
     if device.CanSlewAltAz:
-        device.SlewToAltAz(45, 180)
+        device.SlewToAltAz(Altitude=45, Azimuth=180)
 
 
 def test_slewtoaltazasync(device, disconnect):
@@ -44,7 +44,7 @@ def test_slewtoaltazasync(device, disconnect):
             device.Unpark()
         if device.CanSetTracking:
             device.Tracking = False
-        device.SlewToAltAzAsync(45, 90)
+        device.SlewToAltAzAsync(Altitude=45, Azimuth=90)
         device.AbortSlew()
 
 

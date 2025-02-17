@@ -18,7 +18,7 @@ sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 import pyscope
 
 project = "pyscope"
-copyright = "2024, Walter W. Golay"
+copyright = "2025, Walter W. Golay"
 author = "Walter W. Golay"
 version = pyscope.__version__
 release = version

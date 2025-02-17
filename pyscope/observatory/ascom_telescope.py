@@ -209,19 +209,48 @@ class ASCOMTelescope(ASCOMDevice, Telescope):
         logger.debug("ASCOMTelescope.SetPark() called")
         self._device.SetPark()
 
-    def SlewToAltAz(self, Azimuth, Altitude):  # pragma: no cover
+    def SlewToAltAz(self, **kwargs):  # pragma: no cover
         """
         Deprecated
 
         .. deprecated:: 0.1.1
             ASCOM is deprecating this method.
         """
+        error_msg = "Altitude or Azimuth not provided (give as Altitude/Alt and Azimuth/Az, case-insensitive)"
+        if len(kwargs) < 2:
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+        Azimuth = ["azimuth", "az"]
+        Altitude = ["altitude", "alt"]
+        for key in kwargs:
+            if type(Azimuth) is list and key.lower() in Azimuth:
+                Azimuth = kwargs[key]
+            elif type(Altitude) is list and key.lower() in Altitude:
+                Altitude = kwargs[key]
+        if type(Azimuth) is list or type(Altitude) is list:
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+
         logger.debug(
             f"ASCOMTelescope.SlewToAltAz({Azimuth}, {Altitude}) called"
         )
         self._device.SlewToAltAz(Azimuth, Altitude)
 
-    def SlewToAltAzAsync(self, Azimuth, Altitude):
+    def SlewToAltAzAsync(self, **kwargs):
+        error_msg = "Altitude or Azimuth not provided (give as Altitude/Alt and Azimuth/Az, case-insensitive)"
+        if len(kwargs) < 2:
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+        Azimuth = ["azimuth", "az"]
+        Altitude = ["altitude", "alt"]
+        for key in kwargs:
+            if type(Azimuth) is list and key.lower() in Azimuth:
+                Azimuth = kwargs[key]
+            elif type(Altitude) is list and key.lower() in Altitude:
+                Altitude = kwargs[key]
+        if type(Azimuth) is list or type(Altitude) is list:
+            logger.error(error_msg)
+            raise ValueError(error_msg)
         logger.debug(
             f"ASCOMTelescope.SlewToAltAzAsync({Azimuth}, {Altitude}) called"
         )

@@ -184,7 +184,7 @@ class Telescope(ABC, metaclass=_DocstringInheritee):
         pass
 
     @abstractmethod
-    def SlewToAltAz(self, Azimuth, Altitude):
+    def SlewToAltAz(self, **kwargs):
         """
         Move the telescope to the specified Alt/Az coordinates.
 
@@ -193,17 +193,19 @@ class Telescope(ABC, metaclass=_DocstringInheritee):
         building or dome enclosure, etc.
         `TargetRightAscension` and `TargetDeclination` will be unchanged by this method.
 
+        Implementers should use keyword arguments for the Alt/Az coordinates, detect the keys, and use the values accordingly.
+        This is to allow explicit naming of the coordinates, as well as to separate future implementations from the ASCOM implementation,
+        where the method unintuitively expects the arguments in Azimuth-Altitude order, despite the method name.
+
         Parameters
         ----------
-        Azimuth : `float`
-            Azimuth coordinate in degrees, North-referenced, CW.
-        Altitude : `float`
-            Altitude coordinate in degrees.
+        kwargs : `dict`
+            Keyword arguments for the Alt/Az coordinates. Azimuth should be in degrees, North-referenced, CW. Altitude should be in degrees.
         """
         pass
 
     @abstractmethod
-    def SlewToAltAzAsync(self, Azimuth, Altitude):
+    def SlewToAltAzAsync(self, **kwargs):
         """
         Move the telescope to the specified Alt/Az coordinates asynchronously.
 
@@ -214,12 +216,14 @@ class Telescope(ABC, metaclass=_DocstringInheritee):
         building or dome enclosure, etc.
         `TargetRightAscension` and `TargetDeclination` will be unchanged by this method.
 
+        Implementers should use keyword arguments for the Alt/Az coordinates, detect the keys, and use the values accordingly.
+        This is to allow explicit naming of the coordinates, as well as to separate future implementations from the ASCOM implementation,
+        where the method unintuitively expects the arguments in Azimuth-Altitude order, despite the method name.
+
         Parameters
         ----------
-        Azimuth : `float`
-            Azimuth coordinate in degrees, North-referenced, CW.
-        Altitude : `float`
-            Altitude coordinate in degrees.
+        kwargs : `dict`
+            Keyword arguments for the Alt/Az coordinates. Azimuth should be in degrees, North-referenced, CW. Altitude should be in degrees.
         """
         pass
 

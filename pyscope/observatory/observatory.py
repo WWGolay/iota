@@ -1404,7 +1404,7 @@ class Observatory:
                     while self.focuser.IsMoving:
                         time.sleep(0.1)
                     logger.info("Focuser stopped.")
-                logger.info("Focuser at postion %i" % self.focuser.Position)
+                logger.info("Focuser at position %i" % self.focuser.Position)
                 return True
             else:
                 raise ObservatoryException("Focuser is not connected.")
@@ -1496,9 +1496,9 @@ class Observatory:
                 self.telescope.SlewToCoordinates(slew_obj.ra.hour, slew_obj.dec.deg)
         elif self.telescope.CanSlewAltAz:
             if self.telescope.CanSlewAltAzAsync:
-                self.telescope.SlewToAltAzAsync(altaz_obj.alt.deg, altaz_obj.az.deg)
+                self.telescope.SlewToAltAzAsync(Altitude = altaz_obj.alt.deg, Azimuth = altaz_obj.az.deg)
             else:
-                self.telescope.SlewToAltAz(altaz_obj.alt.deg, altaz_obj.az.deg)
+                self.telescope.SlewToAltAz(Altitude = altaz_obj.alt.deg, Azimuth = altaz_obj.az.deg)
         else:
             raise ObservatoryException("The telescope cannot slew to coordinates.")
 
@@ -2293,11 +2293,11 @@ class Observatory:
 
         if self.telescope.CanSlewAltAzAsync:
             self.telescope.SlewToAltAzAsync(
-                self.cover_calibrator_az, self.cover_calibrator_alt
+                Azimuth = self.cover_calibrator_az, Altitude = self.cover_calibrator_alt
             )
         elif self.telescope.CanSlewAltAz:
             self.telescope.SlewToAltAz(
-                self.cover_calibrator_az, self.cover_calibrator_alt
+                Azimuth = self.cover_calibrator_az, Altitude = self.cover_calibrator_alt
             )
         elif self.telescope.CanSlew:
             obj = self.get_object_slew(
